@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>K-nearest-neighbors-regression | birdfoot</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="K-nearest-neighbors-regression" />
+<meta name="author" content="birdfoot" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="지도 학습 알고리즘" />
+<meta property="og:description" content="지도 학습 알고리즘" />
+<link rel="canonical" href="http://localhost:4000/%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0/2024/05/24/K-nearest-neighbors-regression.html" />
+<meta property="og:url" content="http://localhost:4000/%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0/2024/05/24/K-nearest-neighbors-regression.html" />
+<meta property="og:site_name" content="birdfoot" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-24T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="K-nearest-neighbors-regression" />
+<meta name="twitter:site" content="@birdf00t" />
+<meta name="twitter:creator" content="@birdfoot" />
+<meta name="google-site-verification" content="u4WXQl0Eu66rsQo2kRdCNx" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"birdfoot"},"dateModified":"2024-05-24T00:00:00+09:00","datePublished":"2024-05-24T00:00:00+09:00","description":"지도 학습 알고리즘","headline":"K-nearest-neighbors-regression","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0/2024/05/24/K-nearest-neighbors-regression.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/logo.png"},"name":"birdfoot"},"url":"http://localhost:4000/%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0/2024/05/24/K-nearest-neighbors-regression.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="birdfoot" />
+
+
+
+
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open%20Sans|Roboto|Roboto%20Slab|Inconsolata|Dancing%20Script|Noto%20Sans%20SC|Noto%20Sans%20TC|Noto%20Serif%20SC|Noto%20Serif%20TC|Ma%20Shan%20Zheng">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/skin.css">
+
+<!-- Begin selecting skin -->
+
+  <script>
+    const hour = (new Date()).getHours();
+    let filename = "";
+    if (hour >= 5 && hour < 7) {
+      filename = "/assets/css/skin-sunrise.css";
+    } else if (hour >= 7 && hour < 17) {
+      filename = "/assets/css/skin-daylight.css";
+    } else if (hour >= 17 && hour < 19) {
+      filename = "/assets/css/skin-sunset.css";
+    } else {
+      filename = "/assets/css/skin-midnight.css";
+    }
+    const elem = document.createElement("link");
+    elem.setAttribute("rel", "stylesheet");
+    elem.setAttribute("type", "text/css");
+    elem.setAttribute("href", filename);
+    document.getElementsByTagName("head")[0].appendChild(elem);
+  </script>
+
+<!-- End selecting skin -->
+
+<script async src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+
+
+  </head>
+
+  <body>
+    <div class="site-container">
+      <header class="site-header">
+        <div class="wrapper">
+  <script>
+    function clickSidebarButton() {
+      const elem = document.getElementById("site-sidebar")
+      if (elem.style.display == "none" || elem.style.display == "") {
+        elem.style.display = "block";
+      } else {
+        elem.style.display = "none";
+      }
+    }
+  </script>
+  <a class="site-sidebar-button" onclick="clickSidebarButton()"><i class="far fa-user"></i>
+  </a>
+
+  <a class="site-title" rel="author" href="/">birdfoot</a>
+
+  
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger" title="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+
+      <ul class="trigger">
+              <li><a class="" href="/about/">About</a></li>
+            
+              <li><a class="" href="/years/">Years</a></li>
+            
+              <li><a class="" href="/categories/">Categories</a></li>
+            </ul>
+    </nav>
+  
+</div>
+
+      </header>
+      
+      <div class="site-body wrapper">
+        <aside class="site-sidebar" id="site-sidebar">
+          
+            <div class="sidebar-section"><img src="/logo.png" class="author-avatar u-photo align-center" alt="birdfoot">
+  </div>
+
+<div class="sidebar-section">
+  <ul class="contact-list">
+    <li>
+        <i class="sidebar-icon fas fa-at"></i>
+        <span class="contact-info p-name">birdfoot</span>
+      </li>
+    <li>
+        <i class="sidebar-icon fas fa-envelope"></i>
+        <a class="contact-info u-email" href="mailto:61rdf00t@gmail.com">61rdf00t@gmail.com</a>
+      </li>
+    
+  </ul>
+</div>
+
+<!-- <div class="sidebar-section feed-subscribe">
+  <a href="/feed.xml">
+    <i class="sidebar-icon fas fa-rss"></i><span>Subscribe</span>
+  </a>
+</div> -->
+
+
+
+          
+        </aside>
+        <main class="site-main" id="site-main" aria-label="Content" tabindex="1">
+          <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+
+    <h1 class="post-title p-name" itemprop="name headline">K-nearest-neighbors-regression</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2024-05-24T00:00:00+09:00" itemprop="datePublished">
+        May 24, 2024
+      </time></p>
+
+  </header>
+  <div  id="a" class="post-content e-content" itemprop="articleBody">
+    <h2 id="지도-학습-알고리즘">지도 학습 알고리즘</h2>
+
+<p><strong>분류</strong> : 샘플을 몇 개의 클래스 중 하나로 분류하는 문제<br />
+<strong>회귀</strong> : 정해진 클래스가 아닌 임의의 수치를 예측하는 문제</p>
+
+<h2 id="k-최근접-이웃">k-최근접 이웃</h2>
+
+<p><strong>분류</strong> : 가까운 k개 중에 제일 많은 클래스가 샘플의 클래스가 된다<br />
+<strong>회귀</strong> : 가까운 k개의 평균이 샘플의 수치가 된다</p>
+
+<h2 id="회귀의-탄생">‘회귀’의 탄생</h2>
+
+<p><strong>WHO?</strong> 19세기 통계학자이자 사회학자인 프랜시스 골턴<br />
+<strong>HOW?</strong> 그는 키가 큰 사람의 아이가 부모보다 더 크지 않다는 사실을 관찰하고 이를 ‘평균으로 회귀한다’라고 표현했다. 그 후 두 변수 사이의 상관관계를 분석하는 방법을 회귀라고 불렀다.</p>
+
+<h2 id="k-최근접-이웃-회귀-모델">k-최근접 이웃 회귀 모델</h2>
+
+<p><strong>데이터준비</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">perch_length</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">8.4</span><span class="p">,</span> <span class="mf">13.7</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">16.2</span><span class="p">,</span> <span class="mf">17.4</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">18.7</span><span class="p">,</span> <span class="mf">19.0</span><span class="p">,</span>
+       <span class="mf">19.6</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">21.0</span><span class="p">,</span> <span class="mf">21.0</span><span class="p">,</span> <span class="mf">21.0</span><span class="p">,</span> <span class="mf">21.3</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span>
+       <span class="mf">22.5</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">,</span> <span class="mf">22.7</span><span class="p">,</span> <span class="mf">23.0</span><span class="p">,</span> <span class="mf">23.5</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">,</span> <span class="mf">24.6</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">25.6</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span>
+       <span class="mf">27.3</span><span class="p">,</span> <span class="mf">27.5</span><span class="p">,</span> <span class="mf">27.5</span><span class="p">,</span> <span class="mf">27.5</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">,</span> <span class="mf">28.7</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">32.8</span><span class="p">,</span> <span class="mf">34.5</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mf">36.5</span><span class="p">,</span>
+       <span class="mf">36.0</span><span class="p">,</span> <span class="mf">37.0</span><span class="p">,</span> <span class="mf">37.0</span><span class="p">,</span> <span class="mf">39.0</span><span class="p">,</span> <span class="mf">39.0</span><span class="p">,</span> <span class="mf">39.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">42.0</span><span class="p">,</span>
+       <span class="mf">43.0</span><span class="p">,</span> <span class="mf">43.0</span><span class="p">,</span> <span class="mf">43.5</span><span class="p">,</span> <span class="mf">44.0</span><span class="p">])</span>
+<span class="n">perch_weight</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.9</span><span class="p">,</span> <span class="mf">32.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">51.5</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">78.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">,</span>
+       <span class="mf">85.0</span><span class="p">,</span> <span class="mf">85.0</span><span class="p">,</span> <span class="mf">110.0</span><span class="p">,</span> <span class="mf">115.0</span><span class="p">,</span> <span class="mf">125.0</span><span class="p">,</span> <span class="mf">130.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">,</span> <span class="mf">130.0</span><span class="p">,</span>
+       <span class="mf">135.0</span><span class="p">,</span> <span class="mf">110.0</span><span class="p">,</span> <span class="mf">130.0</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">,</span> <span class="mf">145.0</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">,</span> <span class="mf">170.0</span><span class="p">,</span> <span class="mf">225.0</span><span class="p">,</span> <span class="mf">145.0</span><span class="p">,</span>
+       <span class="mf">188.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">,</span> <span class="mf">197.0</span><span class="p">,</span> <span class="mf">218.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">260.0</span><span class="p">,</span> <span class="mf">265.0</span><span class="p">,</span> <span class="mf">250.0</span><span class="p">,</span> <span class="mf">250.0</span><span class="p">,</span>
+       <span class="mf">300.0</span><span class="p">,</span> <span class="mf">320.0</span><span class="p">,</span> <span class="mf">514.0</span><span class="p">,</span> <span class="mf">556.0</span><span class="p">,</span> <span class="mf">840.0</span><span class="p">,</span> <span class="mf">685.0</span><span class="p">,</span> <span class="mf">700.0</span><span class="p">,</span> <span class="mf">700.0</span><span class="p">,</span> <span class="mf">690.0</span><span class="p">,</span>
+       <span class="mf">900.0</span><span class="p">,</span> <span class="mf">650.0</span><span class="p">,</span> <span class="mf">820.0</span><span class="p">,</span> <span class="mf">850.0</span><span class="p">,</span> <span class="mf">900.0</span><span class="p">,</span> <span class="mf">1015.0</span><span class="p">,</span> <span class="mf">820.0</span><span class="p">,</span> <span class="mf">1100.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span>
+       <span class="mf">1100.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><strong>데이터의 형태 파악을 위한 시각화 (x축: 특성 데이터인 길이, y축: 타깃 데이터인 무게)</strong></p>
+
+<p>농어 길이와 무게가 비례하는 것을 확인할 수 있다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'length'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'weight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>결과 » <img src="https://velog.velcdn.com/images/koeunbi093/post/6c52f094-cae1-40c9-b657-e08d46442b92/image.png" alt="" /></p>
+
+<hr />
+
+<p><strong>데이터를 모델에 사용하기 전에 테스트와 훈련 세트 나누기</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span>
+<span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>perch_length가 1차원 배열이기 때문에 이를 나눈 train_input과 test_input도 1차원이다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">train_input</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>결과 » (42,)</p>
+
+<hr />
+
+<p>사이킷런에서 훈련을 하기 위해 reshape 함수를 사용해서 2차원으로 바꾸기<br />
+ex) [1,2,3] -&gt; [ [1],[2],[3] ] , 크기 (3, ) -&gt; 크기(3, 1)</p>
+
+<p>reshape() 함수는 지정한 크기가 원소 개수와 다르면 에러가 발생한다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>결과 » <span style="color: red">cannot reshape array of size 42 into shape (2,3)</span></p>
+
+<hr />
+
+<p>크기에 -1을 지정하면 나머지 원소 개수로 모두 채워준다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># train_input.reshape(42,1)도 가능
+</span><span class="n">train_input</span> <span class="o">=</span> <span class="n">train_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_input</span><span class="o">=</span><span class="n">test_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">train_input</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>결과 » (42, 1)</p>
+
+<hr />
+
+<p>객체 생성과 회귀 모델 훈련하기</p>
+
+<p>k-최근접 이웃 분류에서 사용한 클래스 KNeighborsClassfier과 비슷한 KNeighborsRegressor을 k-최근접 이웃 회귀에서 사용한다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="n">knr</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>테스트 세트의 테스트 점수 확인</p>
+
+<p>분류: 정확도 (샘플을 정확하게 분류한 개수의 비율)<br />
+회귀: 결정계수 (정확하게 맞히는 것은 불가능하기에 정확도가 아닌 결정계수)</p>
+
+<p>결정계수 = 1- (타깃-예측)^2의 합/ (타깃- 평균)^2의 합</p>
+
+<p>분자와 분모가 비슷해지면(예측이 타깃의 평균가 비슷해지면) 결정계수는 0에 가까워지고
+타깃과 예측이 비슷해지면 결정계수는 1에 가까운 값이 된다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>결과 » 0.992809406101064</p>
+
+<hr />
+
+<p>타깃과 예측의 절댓값 오차 평균</p>
+
+<p>이 외에도 타깃과 예측한 값 사이를 구해서 예측이 어느정도 벗어났는지 확인할 수 있다</p>
+
+<p>예측값이 평균적으로 19g 정도 타깃값과 다르다는 것을 알 수 있다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+<span class="n">test_prediction</span> <span class="o">=</span> <span class="n">knr</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">test_prediction</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mae</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>결과 » 19.157142857142862</p>
+
+<hr />
+
+<p>훈련 세트의 테스트 점수 확인</p>
+
+<p>훈련세트로 훈련을 했기에 훈련 점수가 더 높아야 함에도 불구하고 테스트 세트의 점수가 더 높다.<br />
+이는 과소적합 됐다고 볼 수 있다</p>
+
+<p>과대적합: 훈련세트 점수는 좋지만 테스트 세트의 점수가 굉장히 안 좋다<br />
+과소적합: 테스트 세트의 점수가 더 좋거나 두 점수 모두 너무 낮다</p>
+
+<p>과소 적합은 훈련, 테스트 세트의 크기가 매우 작거나 모델이 단순해서 훈련이 제대로 되지 않았을 때 일어난다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span><span class="n">train_target</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>결과 »0.9698823289099254</p>
+
+<hr />
+
+<p>과소 적합을 해결하기 위해 모델을 조금 더 복잡하게 만들겠다</p>
+
+<p>k-최근접 이웃 알고리즘 모델은 k의 개수를 줄이면 더 복잡하게 만들 수 있다<br />
+이웃의 개수를 줄이면 훈련 세트에 잇는 국지적인 패턴에 민감해지고 이웃의 개수를 늘리면 데이터 전반의 일반적인 패턴을 따를 것이다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">knr</span><span class="p">.</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span>
+
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>테스트와 훈련 세트의 점수 확인</p>
+
+<p>테스트 세트의 점수가 더 낮아졌으니 과소적합 문제가 해결됐다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>결과 » 0.9804899950518966
+0.9746459963987609</p>
+
+  </div>
+  <footer class="post-footer">
+    
+      <div class="post-meta">
+        <i class="fas fa-folder"></i>
+        <ul class="post-taxonomies post-categories">
+          
+          
+            <li class="post-category">
+              
+              <a href="/categories/#%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0">혼공머신</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+
+    <nav class="post-pagination" role="navigation">
+      
+
+      
+    </nav>
+  </footer>
+
+  
+  
+</article>
+
+          <footer class="site-footer">
+            <div class="footer-col-wrapper">
+
+  <div class="footer-col">
+    <div class="copyright">
+      
+      
+      
+      
+      <p>Copyright © 2024 birdfoot; All rights reserved.</p>
+      
+    </div>
+    <p>
+      Powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://github.com/ngzhio/jekyll-theme-hamilton">Hamilton</a>
+    </p>
+  </div>
+
+  <div class="footer-col">
+    <p>my study, project blog</p>
+  </div>
+</div>
+
+          </footer>
+        </main>
+      </div>
+    </div>
+  </body>
+
+</html>
