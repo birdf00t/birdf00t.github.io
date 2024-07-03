@@ -1,7 +1,7 @@
 ---
 title: "텍스트에서 키워드 추출하기"
 layout: post
-categories: "팀프로젝트"
+categories: "teamProject 화장품마케팅분석"
 ---
 
 # 저번에 추출해온 텍스트에서 키워드를 추출했다
