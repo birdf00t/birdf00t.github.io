@@ -1,7 +1,7 @@
 ---
 title: "올리브영 이미지에서 텍스트 추출하기"
 layout: post
-categories: "팀프로젝트"
+categories: "teamProject 화장품마케팅분석"
 ---
 
 ## 화장품마다 광고 키워드를 가져오기 위해 광고 사진에서 텍스트를 추출했다
