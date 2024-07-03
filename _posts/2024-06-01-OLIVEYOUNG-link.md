@@ -1,7 +1,7 @@
 ---
 title: "올리브영 제품 링크 가져오기"
 layout: post
-categories: "팀프로젝트"
+categories: "teamProject 화장품마케팅분석"
 ---
 
 ## 화장품 키워드 마케팅 분석 전 올리브영에서 제품 링크 가져오기
