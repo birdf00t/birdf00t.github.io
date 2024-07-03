@@ -8,10 +8,10 @@ categories: "이미지처리바이블"
 
 ### 1-1 image processing(이미지 처리)
 
-**analog image processing(아날로그 이미지 처리)**
+**analog image processing(아날로그 이미지 처리)**  
 사진 촬영 시 필름에 다양한 화학 처리를 하거나 카메라로 촬영한 이미지를 조작하거나 편집하는 것  
 
-**digital image processing(디지털 이미지 처리)**
+**digital image processing(디지털 이미지 처리)**  
 수학적 알고리즘과 계산 기술에 의존하며 이미지 향상, 이미지 복원, 특징 추출 등이 포함됨. 
 
 **디지털 이미지 처리 단계**
