@@ -1,7 +1,7 @@
 ---
 title: "올리브영 제품 리뷰 가져오기"
 layout: post
-categories: "팀프로젝트"
+categories: "teamProject 화장품마케팅분석"
 ---
 
 ## 올리브영 샘플 리뷰 가져오기
