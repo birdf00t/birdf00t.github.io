@@ -61,8 +61,7 @@ image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
 cv2_imshow(image) #이미지 출력
 ~~~
-![[Pasted image 20240706013412.png]]
-![출력 이미지](./_posts/img/Pasted image 20240706013412.png)
+![img1](./img/Pasted image 20240706013412.png)
 
 각 픽셀 수로 가로 224, 세로 224, 3차원
 ~~~python
@@ -76,14 +75,14 @@ cv2.resize 함수로 이미지의 사이즈 가로, 세로 100, 100으로 수정
 image_small = cv2.resize(image,(100,100))
 cv2_imshow(image_small)
 ~~~
-![[Pasted image 20240706014013.png]]
+![img2](./img/Pasted image 20240706014013.png)
 
 이미지의 배율을 변환한다
 ~~~python
 image_big = cv2.resize(image, dsize=None, fx=2,fy=1)
 cv2_imshow(image_big)
 ~~~
-![[Pasted image 20240706014246.png]]
+![img3](./img/Pasted image 20240706014246.png)
 
 **대칭 변환**  
 cv2.flip 함수를 사용하여 이미지 대칭, 변환할 수 있다
@@ -92,12 +91,12 @@ cv2.flip 함수를 사용하여 이미지 대칭, 변환할 수 있다
 image_fliped = cv2.flip(image,0)
 cv2_imshow(image_fliped)
 ~~~
-![[Pasted image 20240706015140.png]]
+![img4](./img/Pasted image 20240706015140.png)
 ~~~python
 image_fliped = cv2.flip(image,1)
 cv2_imshow(image_fliped)
 ~~~
-![[Pasted image 20240706015150.png]]
+![img5](./img/Pasted image 20240706015150.png)
 
 **회전 변환**  
 cv2.warpAffine 함수는 이미지를 원하는 각도로 회전한다
@@ -107,13 +106,13 @@ matrix = cv2.getRotationMatrix2D((width/2,height/2),90,1)
 result = cv2.warpAffine(image,matrix,(width,height))
 cv2_imshow(result)
 ~~~
-![[Pasted image 20240706020244.png]]
+![img6](./img/Pasted image 20240706020244.png)
 ~~~python
 matrix = cv2.getRotationMatrix2D((width/2,height/2),30,1)
 result = cv2.warpAffine(image,matrix,(width,height),borderValue=200)
 cv2_imshow(result)
 ~~~
-![[Pasted image 20240706020311.png]]
+![img7](./img/Pasted image 20240706020311.png)
 
 **자르기**  
 슬라이싱은 원본 객체의 값을 그대로 참조해서 자른 이미지에 다른 값을 할당시키면 원본 사진 자체가 변한 것을 확인할 수 있다.
