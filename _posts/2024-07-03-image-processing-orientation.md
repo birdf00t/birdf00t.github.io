@@ -62,9 +62,6 @@ image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 cv2_imshow(image) #이미지 출력
 ~~~
 ![img1](./img/Pasted image 20240706013412.png)
-<figure>
-    <img src="./img/Pasted image 20240706013412.png">
-</figure>
 
 각 픽셀 수로 가로 224, 세로 224, 3차원
 ~~~python
