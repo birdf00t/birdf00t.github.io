@@ -61,7 +61,7 @@ image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
 cv2_imshow(image) #이미지 출력
 ~~~
-![](/img/20240706013412.png)
+![](/img/one_img.png)
 
 각 픽셀 수로 가로 224, 세로 224, 3차원
 ~~~python
