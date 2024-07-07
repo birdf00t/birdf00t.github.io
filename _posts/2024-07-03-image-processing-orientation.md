@@ -61,7 +61,7 @@ image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
 cv2_imshow(image) #이미지 출력
 ~~~
-![img1](./image.png)
+![img1](../image.png)
 
 각 픽셀 수로 가로 224, 세로 224, 3차원
 ~~~python
@@ -75,7 +75,7 @@ cv2.resize 함수로 이미지의 사이즈 가로, 세로 100, 100으로 수정
 image_small = cv2.resize(image,(100,100))
 cv2_imshow(image_small)
 ~~~
-![img2](./img/Pasted image 20240706014013.png)
+![img2](../img/Pasted image 20240706014013.png)
 
 이미지의 배율을 변환한다
 ~~~python
