@@ -85,9 +85,9 @@ HSV는 색상을 세 가지 요소로 나눈다.
 
 ##### 이미지 불러오기
 
-tf.keras.utils.get_file : url 이미지를 다운로드하고 저장된 로컬 경로를 반환한다
-tf.io.read_file : 경로에서 이미지 파일을 바이너리 문자열로 읽어온다
-tf.image.decode_jpeg : 바이너리 문자열을 숫자 텐서로 디코딩한다
+tf.keras.utils.get_file : url 이미지를 다운로드하고 저장된 로컬 경로를 반환한다  
+tf.io.read_file : 경로에서 이미지 파일을 바이너리 문자열로 읽어온다  
+tf.image.decode_jpeg : 바이너리 문자열을 숫자 텐서로 디코딩한다  
 
 ```python
 import tensorflow as tf
