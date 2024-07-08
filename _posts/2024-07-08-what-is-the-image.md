@@ -157,7 +157,7 @@ plt.axis('off')
 plt.show()
 ```
 
-![](/img/20240708-2.png)
+![](/img/20240708-2.png)  
 RGB 이미지를 그레이 스케일로 변경하는 공식(grayscale = R x 0.299 + G x 0.587 + B x 0.114)으로 코드로 구현할 수 있다
 
 ```python
