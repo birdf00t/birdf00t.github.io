@@ -11,7 +11,7 @@ categories: "혼공머신"
 
 ### 사이킷런의 앙상블 학습 알고리즘
 
-##### 랜덤 포레스트
+**랜덤 포레스트**
 
 대표적
 인 결정 트리 기반의 앙상블 학습 방법으로 안정적인 성능 덕분에 많이 사용되고 있어서 앙상블 학습을 적용할 때 가장 먼저 시도해보길 권한다.
@@ -60,7 +60,7 @@ scores = cross_validate(rf, train_input, train_target,return_train_score=True,n_
 print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
-feature*importances* : 랜덤포레스트 모델을 훈련 후 특성 중요도
+feature_importance : 랜덤포레스트 모델을 훈련 후 특성 중요도  
 각 [알코올 도수, 당도, pH] 이다.
 
 ```python
@@ -68,7 +68,7 @@ rf.fit(train_input,train_target)
 print(rf.feature_importances_)
 ```
 
-oob*score*: 부트스트랩 샘플에 포함되지 않고 남는 샘플(OOB)로 모델을 평가한 점수
+oob_score: 부트스트랩 샘플에 포함되지 않고 남는 샘플(OOB)로 모델을 평가한 점수
 
 ```python
 rf=RandomForestClassifier(oob_score=True, n_jobs=-1,random_state=42)
@@ -76,7 +76,7 @@ rf.fit(train_input,train_target)
 print(rf.oob_score_)
 ```
 
-##### 엑스트라 트리
+**엑스트라 트리**
 
 랜덤 포레스트와 비슷하게 결정 트리를 사용하여 앙상블 모델을 만들지만 부트스트랩 샘플을 사용하지 않고 전체 훈련 세트를 사용하지만 대신 랜덤하게 노드를 분할해 성능은 낮지만 과대적합을 감소시키고 검증 세트의 점수를 높인다. 엑스트라 트리는 무작위성이 더 커서 랜덤 포레스트보다 더 많은 결정 트리를 훈련 시켜야 하지만 랜덤 노드 분할로 인해 빠른 계산 속도를 갖는다.
 
@@ -97,14 +97,14 @@ et.fit(train_input,train_target)
 print(et.feature_importances_)
 ```
 
-##### 그레이디언트 부스팅
+**그레이디언트 부스팅**
 
-깊이가 얕은 결정 트리를 사용하여 이전 트리의 오차를 보완하는 방식으로 앙상블하는 방법
+깊이가 얕은 결정 트리를 사용하여 이전 트리의 오차를 보완하는 방식으로 앙상블하는 방법  
 깊이가 얕은 결정 트리를 사용하기 때문에 과대적합에 강하고 일반적으로 높은 일반화 성능 기대할 수 있지만 순서대로 트리를 추가하기 때문에 속도가 느리다
 
 경사하강법을 사용해서 트리를 앙상블에 추가하고 분류는 로지스틱 손실 함수, 회귀는 평균 제곱 오차 함수 사용
 
-과대적합에 가능해서 결정 트리의 개수를 늘려도 과대적합이 되지 않는다
+과대적합에 가능해서 결정 트리의 개수를 늘려도 과대적합이 되지 않는다  
 트리의 개수를 늘리면 성능이 더 향상될 수 있다
 
 ```python
@@ -130,7 +130,7 @@ gb.fit(train_input,train_target)
 print(gb.feature_importances_)
 ```
 
-##### 히스토그램 기반 그레이디언트 부스팅
+**히스토그램 기반 그레이디언트 부스팅**
 
 정형 데이터를 다루는 머신러닝 알고리즘 중 가장 인기가 높다
 
@@ -147,7 +147,7 @@ scores = cross_validate(hgb,train_input,train_target,return_train_score=True)
 print(np.mean(scores['train_score']),np.mean(scores['test_score']))
 ```
 
-훈련세트의 특성 중요도
+훈련세트의 특성 중요도  
 각 순서대로 특성 중요도, 특성 평균, 표준 편차를 담고 있다
 
 그레이디언트와 비슷하게 당도에 집중하고 있다
@@ -173,14 +173,15 @@ hgb.score(test_input,test_target)
 
 사이킷런 말고도 그레이디언트 부스팅 알고리즘을 XGBoost, LightGBM 라이브러리도 사용할 수 있다
 
-##### 사이킷런 클래스 정리
+**사이킷런 클래스 정리**
 
-RandomForestClassifier(랜덤 포레스트 분류 클래스)
+RandomForestClassifier(랜덤 포레스트 분류 클래스)  
 n_estimators : 앙상블 구성 트리 개수 기본값 100<br>criterion : 불순도 기본값 'gini'<br>max_depth : 트리 최대 깊이 기본값 None<br>min_sample_split : 노드를 나누기 위한 최소 샘플 개수 기본값 2<br>max_features : 최적희 분할을 위한 탐색할 특성 개수 기본값 auto(특성 개수의 제곱근)<br>bootstrap : 부트스트랩 샘플 사용 여부 기본값 True<br>oob_score : OOB 샘플로 훈련 모델 평가 여부 기본값 False<br>n_jobs : 사용할 CPU 코어 수 기본값 1, -1은 모든 코어 사용
 
-ExtraTreesClassifier(엑스트라 트리 분류 클래스) : 랜덤 포레스트와 동일  
-GradientBoostingClassifier(그레이디언트 부스팅 분류 클래스)
+ExtraTreesClassifier(엑스트라 트리 분류 클래스) : 랜덤 포레스트와 동일
+
+GradientBoostingClassifier(그레이디언트 부스팅 분류 클래스)  
 loss : 손실 함수 지정 기본값 'deviance' 로지스틱<br>learning_rate : 트리가 앙상블에 기여하는 정도 기본값 0.1<br>n_estimators : 부스팅 단계를 수행하는 트리의 개수 기본값 100<br>subsample : 훈련 세트의 샘플 비율 기본값 1.0<br>max_depth : 개별 회귀 트리의 최대 깊이 기본값 3
 
-HistGradientBoostingClassifier(히스토그램 기반 그레이디언트 부스팅 분류 클래스)
+HistGradientBoostingClassifier(히스토그램 기반 그레이디언트 부스팅 분류 클래스)  
 learning_rate : 학습률 기본값 0.1, 1.0이면 감쇠가 없다<br>max_iter : 부스팅 단계를 수행하는 트리의 개수 기본값 100<br>max_bins : 입력 데이터를 나눌 구간의 개수 기본값 255
