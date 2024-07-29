@@ -1,5 +1,5 @@
 ---
-title: "트리의 앙상블"
+title: "ensemble of trees"
 layout: post
 categories: "혼공머신"
 ---

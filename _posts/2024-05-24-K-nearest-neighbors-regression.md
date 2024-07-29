@@ -1,5 +1,5 @@
 ---
-title: "K-nearest-neighbors-regression"
+title: "K nearest neighbors regression"
 layout: post
 categories: "혼공머신"
 ---
