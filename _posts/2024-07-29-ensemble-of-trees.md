@@ -173,15 +173,13 @@ hgb.score(test_input,test_target)
 
 사이킷런 말고도 그레이디언트 부스팅 알고리즘을 XGBoost, LightGBM 라이브러리도 사용할 수 있다
 
-**사이킷런 클래스 정리**
-
-RandomForestClassifier(랜덤 포레스트 분류 클래스)  
+**RandomForestClassifier(랜덤 포레스트 분류 클래스)**  
 n_estimators : 앙상블 구성 트리 개수 기본값 100<br>criterion : 불순도 기본값 'gini'<br>max_depth : 트리 최대 깊이 기본값 None<br>min_sample_split : 노드를 나누기 위한 최소 샘플 개수 기본값 2<br>max_features : 최적희 분할을 위한 탐색할 특성 개수 기본값 auto(특성 개수의 제곱근)<br>bootstrap : 부트스트랩 샘플 사용 여부 기본값 True<br>oob_score : OOB 샘플로 훈련 모델 평가 여부 기본값 False<br>n_jobs : 사용할 CPU 코어 수 기본값 1, -1은 모든 코어 사용
 
-ExtraTreesClassifier(엑스트라 트리 분류 클래스) : 랜덤 포레스트와 동일
+**ExtraTreesClassifier(엑스트라 트리 분류 클래스) : 랜덤 포레스트와 동일**
 
-GradientBoostingClassifier(그레이디언트 부스팅 분류 클래스)  
+**GradientBoostingClassifier(그레이디언트 부스팅 분류 클래스)**  
 loss : 손실 함수 지정 기본값 'deviance' 로지스틱<br>learning_rate : 트리가 앙상블에 기여하는 정도 기본값 0.1<br>n_estimators : 부스팅 단계를 수행하는 트리의 개수 기본값 100<br>subsample : 훈련 세트의 샘플 비율 기본값 1.0<br>max_depth : 개별 회귀 트리의 최대 깊이 기본값 3
 
-HistGradientBoostingClassifier(히스토그램 기반 그레이디언트 부스팅 분류 클래스)  
+**HistGradientBoostingClassifier(히스토그램 기반 그레이디언트 부스팅 분류 클래스)**  
 learning_rate : 학습률 기본값 0.1, 1.0이면 감쇠가 없다<br>max_iter : 부스팅 단계를 수행하는 트리의 개수 기본값 100<br>max_bins : 입력 데이터를 나눌 구간의 개수 기본값 255
