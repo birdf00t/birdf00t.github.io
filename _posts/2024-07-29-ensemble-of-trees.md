@@ -60,6 +60,8 @@ scores = cross_validate(rf, train_input, train_target,return_train_score=True,n_
 print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
+-> 0.9973541965122431 0.8905151032797809
+
 feature_importance : 랜덤포레스트 모델을 훈련 후 특성 중요도  
 각 [알코올 도수, 당도, pH] 이다.
 
@@ -68,6 +70,8 @@ rf.fit(train_input,train_target)
 print(rf.feature_importances_)
 ```
 
+-> [0.23167441 0.50039841 0.26792718]
+
 oob_score: 부트스트랩 샘플에 포함되지 않고 남는 샘플(OOB)로 모델을 평가한 점수
 
 ```python
@@ -75,6 +79,8 @@ rf=RandomForestClassifier(oob_score=True, n_jobs=-1,random_state=42)
 rf.fit(train_input,train_target)
 print(rf.oob_score_)
 ```
+
+-> 0.8934000384837406
 
 **엑스트라 트리**
 
@@ -90,12 +96,16 @@ scores = cross_validate(et,train_input, train_target,return_train_score=True,n_j
 print(np.mean(scores['train_score']),np.mean(scores['test_score']))
 ```
 
+-> 0.9974503966084433 0.8887848893166506
+
 엑스트라 트리 모델에서의 특성 중요도
 
 ```python
 et.fit(train_input,train_target)
 print(et.feature_importances_)
 ```
+
+-> [0.20183568 0.52242907 0.27573525]
 
 **그레이디언트 부스팅**
 
@@ -115,6 +125,8 @@ scores=cross_validate(gb, train_input, train_target, return_train_score=True,n_j
 print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
+-> 0.8881086892152563 0.8720430147331015
+
 결정 트리 개수를 5배 늘렸지만 과대적합을 잘 억제하고 있다
 
 ```python
@@ -123,12 +135,16 @@ scores = cross_validate(gb,train_input,train_target,return_train_score=True,n_jo
 print(np.mean(scores['train_score']),np.mean(scores['test_score']))
 ```
 
+-> 0.9464595437171814 0.8780082549788999
+
 특성 중요도를 보면 랜덤 포레스트보다 당도에 더 집중된 것을 확인할 수 있다
 
 ```python
 gb.fit(train_input,train_target)
 print(gb.feature_importances_)
 ```
+
+-> [0.15872278 0.68010884 0.16116839]
 
 **히스토그램 기반 그레이디언트 부스팅**
 
@@ -147,6 +163,8 @@ scores = cross_validate(hgb,train_input,train_target,return_train_score=True)
 print(np.mean(scores['train_score']),np.mean(scores['test_score']))
 ```
 
+-> 0.9321723946453317 0.8801241948619236
+
 훈련세트의 특성 중요도  
 각 순서대로 특성 중요도, 특성 평균, 표준 편차를 담고 있다
 
@@ -162,6 +180,12 @@ print(result.importances_mean)
 print(result.importances_std)
 ```
 
+-> [[0.08793535 0.08350972 0.08908986 0.08312488 0.09274581 0.08755051 0.08601116 0.09601693 0.09082163 0.09082163]
+ [0.22782374 0.23590533 0.23936887 0.23436598 0.23725226 0.23436598 0.23359631 0.23398114 0.23994612 0.22724649]
+ [0.08581874 0.08601116 0.08062344 0.07504329 0.08427939 0.07792957 0.07234943 0.07465846 0.08139311 0.08466423]]
+[0.08876275 0.23438522 0.08027708]
+[0.00382333 0.00401363 0.00477012]
+
 테스트 세트로 성능 점수
 
 약 87퍼의 정확도를 얻은걸 보아 앙상블 모델은 단일 결정 트리보다 더 좋은 결과를 얻을 수 있다
@@ -170,6 +194,8 @@ print(result.importances_std)
 result = permutation_importance(hgb, test_input,test_target,n_repeats=10,random_state=42,n_jobs=-1)
 hgb.score(test_input,test_target)
 ```
+
+-> 0.8723076923076923
 
 ### 사이킷런 라이브러리
 
