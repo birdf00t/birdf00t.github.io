@@ -82,7 +82,7 @@ permalink: /write/
       {% if existing_tags.size > 0 %}
       <div class="chip-row" id="tag-chip-row">
         {% for t in existing_tags %}
-        <button type="button" class="tag-chip" data-tag="{{ t }}">#{{ t }}</button>
+        <button type="button" class="tag-chip" data-tag="{{ t }}">{{ t }}</button>
         {% endfor %}
       </div>
       {% endif %}
@@ -116,9 +116,11 @@ permalink: /write/
     <div class="preview-card">
       <article class="post">
         <header class="post-header">
-          <span class="badge" id="pv-series" hidden></span>
           <h1 id="pv-title">제목을 입력하세요</h1>
           <p class="post-meta" id="pv-meta"></p>
+          <div class="post-tags" id="pv-tags">
+            <span class="badge" id="pv-series" hidden></span>
+          </div>
         </header>
         <div class="post-content" id="pv-content">
           <p class="hint">본문을 작성하면 여기에 실시간으로 표시됩니다.</p>
@@ -157,6 +159,7 @@ permalink: /write/
   var pvSeries = document.getElementById('pv-series');
   var pvTitle = document.getElementById('pv-title');
   var pvMeta = document.getElementById('pv-meta');
+  var pvTags = document.getElementById('pv-tags');
   var pvContent = document.getElementById('pv-content');
 
   dateEl.valueAsDate = new Date();
@@ -305,6 +308,7 @@ permalink: /write/
     var content = contentEl.value;
 
     pvTitle.textContent = title || '제목을 입력하세요';
+    pvMeta.textContent = formatKoreanDate(dateEl.value);
 
     if (series) {
       pvSeries.textContent = series;
@@ -313,11 +317,14 @@ permalink: /write/
       pvSeries.hidden = true;
     }
 
-    var metaParts = [formatKoreanDate(dateEl.value)];
-    if (tags.length) {
-      metaParts.push(tags.map(function (t) { return '#' + t; }).join(' '));
-    }
-    pvMeta.textContent = metaParts.filter(Boolean).join(' · ');
+    var tagEls = pvTags.querySelectorAll('.tag');
+    tagEls.forEach(function (el) { el.remove(); });
+    tags.forEach(function (t) {
+      var span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = t;
+      pvTags.appendChild(span);
+    });
 
     pvContent.innerHTML = content.trim()
       ? renderMarkdown(content)

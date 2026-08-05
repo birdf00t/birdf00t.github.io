@@ -2,9 +2,9 @@
   <div class="wrap">
     <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     <nav class="site-nav">
-      <a href="{{ '/' | relative_url }}">홈</a>
-      <a href="{{ '/series/' | relative_url }}">시리즈</a>
-      <a href="{{ '/write/' | relative_url }}">글쓰기</a>
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active"{% endif %}>홈</a>
+      <a href="{{ '/series/' | relative_url }}"{% if page.url == '/series/' %} class="is-active"{% endif %}>시리즈</a>
+      <a href="{{ '/write/' | relative_url }}"{% if page.url == '/write/' %} class="is-active"{% endif %}>글쓰기</a>
     </nav>
   </div>
 </header>

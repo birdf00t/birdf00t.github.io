@@ -3,16 +3,16 @@ layout: default
 ---
 <article class="post">
   <header class="post-header">
-    {% if page.series %}
-    <a class="badge" href="{{ '/series/' | relative_url }}#{{ page.series | slugify }}">{{ page.series }}</a>
-    {% endif %}
     <h1>{{ page.title }}</h1>
-    <p class="post-meta">{{ page.date | date: "%Y년 %m월 %d일" }}
-      {% if page.tags.size > 0 %}
-      ·
-      {% for tag in page.tags %}<a class="tag" href="{{ '/' | relative_url }}?tag={{ tag | url_encode }}">#{{ tag }}</a>{% endfor %}
+    <p class="post-meta">{{ page.date | date: "%Y년 %m월 %d일" }}</p>
+    {% if page.series or page.tags.size > 0 %}
+    <div class="post-tags">
+      {% if page.series %}
+      <a class="badge" href="{{ '/series/' | relative_url }}#{{ page.series | slugify }}">{{ page.series }}</a>
       {% endif %}
-    </p>
+      {% for tag in page.tags %}<a class="tag" href="{{ '/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>{% endfor %}
+    </div>
+    {% endif %}
   </header>
   <div class="post-content">
     {{ content }}

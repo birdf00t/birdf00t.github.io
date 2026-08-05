@@ -27,7 +27,7 @@ layout: default
 <div class="tag-filter" id="tag-filter">
   <button type="button" class="tag-chip is-active" data-tag="">전체</button>
   {% for tag in all_tags %}
-  <button type="button" class="tag-chip" data-tag="{{ tag }}">#{{ tag }}</button>
+  <button type="button" class="tag-chip" data-tag="{{ tag }}">{{ tag }}</button>
   {% endfor %}
 </div>
 {% endif %}
@@ -35,11 +35,29 @@ layout: default
 <ul class="post-list" id="post-list">
   {% for post in site.posts %}
   <li class="post-item" data-tags="{{ post.tags | join: ',' }}">
+    {% assign img_split = post.content | split: '<img' %}
+    {% if img_split.size > 1 %}
+      {% assign src_split = img_split[1] | split: 'src="' %}
+      {% if src_split.size > 1 %}
+        {% assign thumb_url = src_split[1] | split: '"' | first %}
+      {% endif %}
+    {% endif %}
+    {% if thumb_url %}
+    <a class="post-thumb" href="{{ post.url | relative_url }}">
+      <img src="{{ thumb_url }}" alt="" loading="lazy">
+    </a>
+    {% endif %}
+    {% assign thumb_url = nil %}
     {% if post.series %}<span class="badge">{{ post.series }}</span>{% endif %}
     <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
     <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
     {% if post.excerpt %}
     <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+    {% endif %}
+    {% if post.tags.size > 0 %}
+    <div class="post-tags">
+      {% for tag in post.tags %}<a class="tag" href="{{ '/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>{% endfor %}
+    </div>
     {% endif %}
   </li>
   {% endfor %}
