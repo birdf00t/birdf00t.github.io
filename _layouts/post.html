@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    {% if page.series %}
+    <a class="badge" href="{{ '/series/' | relative_url }}#{{ page.series | slugify }}">{{ page.series }}</a>
+    {% endif %}
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta">{{ page.date | date: "%Y년 %m월 %d일" }}
+      {% if page.tags.size > 0 %}
+      ·
+      {% for tag in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>{% endfor %}
+      {% endif %}
+    </p>
+  </header>
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>
+
+<a class="back-link" href="{{ '/' | relative_url }}">← 목록으로</a>

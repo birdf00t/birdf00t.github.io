@@ -1,0 +1,20 @@
+title: birdf00t
+description: 개발과 배움을 기록하는 공간
+url: "https://birdf00t.github.io"
+baseurl: ""
+
+author: birdf00t
+
+# Build settings
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

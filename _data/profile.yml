@@ -1,0 +1,11 @@
+name: birdf00t
+bio: 배우고 만든 것을 기록합니다.
+email: your-email@example.com
+github: birdf00t
+links:
+  - label: GitHub
+    url: https://github.com/birdf00t
+  # - label: Twitter
+  #   url: https://twitter.com/yourhandle
+  # - label: Blog
+  #   url: https://yourblog.example.com

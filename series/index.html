@@ -1,0 +1,28 @@
+---
+layout: default
+title: 시리즈
+permalink: /series/
+---
+
+<h1>시리즈</h1>
+
+{% assign grouped = site.posts | group_by: "series" %}
+{% assign grouped = grouped | sort: "name" %}
+
+{% for group in grouped %}
+<section class="group-section" id="{{ group.name | slugify }}">
+  <h2 class="group-title">{{ group.name | default: "미분류" }}</h2>
+  <ul class="group-list">
+    {% for post in group.items %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+{% if site.posts.size == 0 %}
+<p>아직 글이 없습니다.</p>
+{% endif %}

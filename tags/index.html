@@ -1,0 +1,43 @@
+---
+layout: default
+title: 태그
+permalink: /tags/
+---
+
+<h1>태그</h1>
+
+{% assign tag_str = "" %}
+{% for post in site.posts %}
+  {% for tag in post.tags %}
+    {% unless tag_str contains tag %}
+      {% assign tag_str = tag_str | append: tag | append: "||" %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+{% assign all_tags = tag_str | split: "||" | sort %}
+
+<div class="tag-jump">
+  {% for tag in all_tags %}
+  <a class="badge" href="#{{ tag | slugify }}">#{{ tag }}</a>
+  {% endfor %}
+</div>
+
+{% for tag in all_tags %}
+<section class="group-section" id="{{ tag | slugify }}">
+  <h2 class="group-title">#{{ tag }}</h2>
+  <ul class="group-list">
+    {% for post in site.posts %}
+      {% if post.tags contains tag %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+{% if all_tags.size == 0 %}
+<p>아직 태그가 없습니다.</p>
+{% endif %}

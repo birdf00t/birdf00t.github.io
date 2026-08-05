@@ -1,0 +1,19 @@
+---
+layout: default
+---
+{% if page.content %}
+<div class="intro">{{ content }}</div>
+{% endif %}
+
+<ul class="post-list">
+  {% for post in site.posts %}
+  <li class="post-item">
+    {% if post.series %}<span class="badge">{{ post.series }}</span>{% endif %}
+    <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+    {% if post.excerpt %}
+    <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
