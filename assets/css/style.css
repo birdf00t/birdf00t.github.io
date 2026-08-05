@@ -232,6 +232,13 @@ main.wrap {
   color: var(--text);
 }
 .write-form textarea { resize: vertical; line-height: 1.6; }
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: -8px;
+}
+.chip-row .tag-chip { font-size: 12px; padding: 4px 10px; }
 .req { color: #e11d48; }
 .hint { color: var(--muted); font-size: 12px; }
 .write-actions {
@@ -410,6 +417,7 @@ main.wrap {
   gap: 12px;
   flex-wrap: wrap;
 }
+.edit-banner[hidden] { display: none; }
 .edit-banner #edit-cancel-btn {
   font-family: inherit;
   font-size: 13px;
