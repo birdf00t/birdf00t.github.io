@@ -242,6 +242,46 @@ main.wrap {
   margin-right: 6px;
 }
 .badge:hover { text-decoration: none; opacity: 0.85; }
+.series-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+}
+.series-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  padding: 20px 4px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+}
+.series-link:hover .series-name { color: var(--accent); }
+.series-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+.series-count {
+  font-size: 13px;
+  color: var(--muted);
+}
+.series-back-btn {
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.series-back-btn:hover { color: var(--text); }
+
 .group-section { margin-bottom: 40px; }
 .group-title {
   font-size: 20px;

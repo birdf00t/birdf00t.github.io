@@ -4,25 +4,95 @@ title: 시리즈
 permalink: /series/
 ---
 
-<h1>시리즈</h1>
-
 {% assign grouped = site.posts | group_by: "series" %}
 {% assign grouped = grouped | sort: "name" %}
 
-{% for group in grouped %}
-<section class="group-section" id="{{ group.name | slugify }}">
-  <h2 class="group-title">{{ group.name | default: "미분류" }}</h2>
-  <ul class="group-list">
-    {% for post in group.items %}
+<div id="series-list-view">
+  <h1>시리즈</h1>
+  <ul class="series-list">
+    {% for group in grouped %}
     <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+      <button type="button" class="series-link" data-series="{{ group.name | slugify }}">
+        <span class="series-name">{{ group.name | default: "미분류" }}</span>
+        <span class="series-count">{{ group.items.size }}개의 글</span>
+      </button>
     </li>
     {% endfor %}
   </ul>
-</section>
-{% endfor %}
+  {% if site.posts.size == 0 %}
+  <p>아직 글이 없습니다.</p>
+  {% endif %}
+</div>
 
-{% if site.posts.size == 0 %}
-<p>아직 글이 없습니다.</p>
-{% endif %}
+<div id="series-detail-view" hidden>
+  <button type="button" class="back-link series-back-btn">← 시리즈 목록</button>
+
+  {% for group in grouped %}
+  <section class="group-section" id="series-{{ group.name | slugify }}" data-series="{{ group.name | slugify }}" hidden>
+    <h2 class="group-title">{{ group.name | default: "미분류" }}</h2>
+    <ul class="group-list">
+      {% for post in group.items %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span class="post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+
+<script>
+(function () {
+  var listView = document.getElementById('series-list-view');
+  var detailView = document.getElementById('series-detail-view');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.series-link'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('#series-detail-view .group-section'));
+  var backBtn = document.querySelector('.series-back-btn');
+
+  function showSeries(slug) {
+    var found = false;
+    sections.forEach(function (s) {
+      var match = s.getAttribute('data-series') === slug;
+      s.hidden = !match;
+      if (match) found = true;
+    });
+    if (found) {
+      listView.hidden = true;
+      detailView.hidden = false;
+    } else {
+      showList();
+    }
+  }
+
+  function showList() {
+    listView.hidden = false;
+    detailView.hidden = true;
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function () {
+      var slug = link.getAttribute('data-series');
+      showSeries(slug);
+      var url = new URL(window.location.href);
+      url.searchParams.set('s', slug);
+      history.pushState({ s: slug }, '', url);
+    });
+  });
+
+  backBtn.addEventListener('click', function () {
+    showList();
+    var url = new URL(window.location.href);
+    url.searchParams.delete('s');
+    history.pushState({}, '', url);
+  });
+
+  window.addEventListener('popstate', function () {
+    var slug = new URL(window.location.href).searchParams.get('s');
+    if (slug) { showSeries(slug); } else { showList(); }
+  });
+
+  var initialSlug = new URL(window.location.href).searchParams.get('s');
+  if (initialSlug) { showSeries(initialSlug); }
+})();
+</script>

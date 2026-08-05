@@ -8,7 +8,7 @@ layout: default
     {% if page.series or page.tags.size > 0 %}
     <div class="post-tags">
       {% if page.series %}
-      <a class="badge" href="{{ '/series/' | relative_url }}#{{ page.series | slugify }}">{{ page.series }}</a>
+      <a class="badge" href="{{ '/series/' | relative_url }}?s={{ page.series | slugify }}">{{ page.series }}</a>
       {% endif %}
       {% for tag in page.tags %}<a class="tag" href="{{ '/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>{% endfor %}
     </div>
