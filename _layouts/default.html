@@ -10,7 +10,7 @@
 </head>
 <body>
   {% include header.html %}
-  <main class="wrap">
+  <main class="wrap{% if page.url == '/write/' %} wrap-wide{% endif %}">
     {{ content }}
   </main>
   {% include footer.html %}

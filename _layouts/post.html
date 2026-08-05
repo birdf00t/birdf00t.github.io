@@ -10,7 +10,7 @@ layout: default
     <p class="post-meta">{{ page.date | date: "%Y년 %m월 %d일" }}
       {% if page.tags.size > 0 %}
       ·
-      {% for tag in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>{% endfor %}
+      {% for tag in page.tags %}<a class="tag" href="{{ '/' | relative_url }}?tag={{ tag | url_encode }}">#{{ tag }}</a>{% endfor %}
       {% endif %}
     </p>
   </header>
