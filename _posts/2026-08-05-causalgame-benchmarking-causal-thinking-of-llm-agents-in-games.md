@@ -31,3 +31,6 @@ _**기존 벤치마크들과 비교 기준**_ : Automated evaluation(자동 평�
 ![](https://velog.velcdn.com/images/birdf00t/post/fc59ab22-6e9a-40bd-971d-f45d8628f443/image.png)
 기존 나온 LLM들을 CausalGame 벤치마크로 선택 편향, 숨겨진 교란 두 가지 버전 결과
 ![](https://velog.velcdn.com/images/birdf00t/post/92153dd1-8bd7-4002-b686-dc3822ad2e5a/image.png)
+
+### Info
+
