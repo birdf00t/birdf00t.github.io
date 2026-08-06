@@ -52,9 +52,7 @@ a:hover { text-decoration: underline; }
   justify-content: space-between;
 }
 .site-header-profile {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
+  margin-top: 6px;
 }
 .site-header-profile .profile-bio {
   margin: 0 0 10px;
