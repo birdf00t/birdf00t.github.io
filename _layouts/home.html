@@ -2,17 +2,6 @@
 layout: default
 ---
 
-<div class="profile">
-  <h1>{{ site.data.profile.name }}</h1>
-  <p class="profile-bio">{{ site.data.profile.bio }}</p>
-  <ul class="profile-links">
-    <li>✉️ <a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a></li>
-    {% for link in site.data.profile.links %}
-    <li>🔗 <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
-
 {% assign tag_names = site.tags | sort %}
 
 <div class="home-layout">
