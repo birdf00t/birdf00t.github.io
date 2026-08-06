@@ -11,9 +11,7 @@
         <a href="{{ '/write/' | relative_url }}"{% if page.url == '/write/' %} class="is-active"{% endif %}>글쓰기</a>
       </nav>
     </div>
-    {% if page.url == '/' %}
     <div class="site-header-profile">
-      <p class="profile-bio">{{ site.data.profile.bio }}</p>
       <ul class="profile-links">
         <li>✉️ <a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a></li>
         {% for link in site.data.profile.links %}
@@ -21,6 +19,5 @@
         {% endfor %}
       </ul>
     </div>
-    {% endif %}
   </div>
 </header>
