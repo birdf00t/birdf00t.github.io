@@ -1,6 +1,9 @@
 <header class="site-header">
   <div class="wrap">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="site-title" href="{{ '/' | relative_url }}">
+      <img class="mascot" src="{{ '/assets/img/mascot.png' | relative_url }}" alt="">
+      {{ site.title }}
+    </a>
     <nav class="site-nav">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active"{% endif %}>홈</a>
       <a href="{{ '/series/' | relative_url }}"{% if page.url == '/series/' %} class="is-active"{% endif %}>시리즈</a>
