@@ -6,7 +6,7 @@
   --accent: #12b886;
   --accent-active: #20c997;
   --tag-bg: #f8f9fa;
-  --max-width: 768px;
+  --max-width: 960px;
   color-scheme: light;
 }
 
@@ -154,12 +154,12 @@ main.wrap {
 .home-layout {
   display: flex;
   align-items: flex-start;
-  gap: 28px;
+  gap: 40px;
   margin-top: 32px;
 }
 .tag-sidebar {
-  flex: 0 0 130px;
-  width: 130px;
+  flex: 0 0 160px;
+  width: 160px;
   position: sticky;
   top: 24px;
 }
@@ -629,7 +629,7 @@ main.wrap {
 .write-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 28px;
+  gap: 40px;
   align-items: start;
 }
 @media (max-width: 860px) {
