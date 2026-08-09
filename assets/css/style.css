@@ -154,12 +154,12 @@ main.wrap {
 .home-layout {
   display: flex;
   align-items: flex-start;
-  gap: 40px;
+  gap: 28px;
   margin-top: 32px;
 }
 .tag-sidebar {
-  flex: 0 0 160px;
-  width: 160px;
+  flex: 0 0 130px;
+  width: 130px;
   position: sticky;
   top: 24px;
 }
@@ -460,8 +460,6 @@ main.wrap {
 }
 #save-hint { margin-top: 4px; }
 
-.wrap-wide { max-width: 1080px; }
-.wrap-home { max-width: 968px; }
 
 .gh-connect {
   border: 1px solid var(--border);
@@ -631,7 +629,7 @@ main.wrap {
 .write-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
+  gap: 28px;
   align-items: start;
 }
 @media (max-width: 860px) {
