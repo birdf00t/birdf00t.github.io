@@ -4,6 +4,8 @@ url: "https://birdf00t.github.io"
 baseurl: ""
 
 author: birdf00t
+timezone: Asia/Seoul
+future: true
 
 # Build settings
 markdown: kramdown
