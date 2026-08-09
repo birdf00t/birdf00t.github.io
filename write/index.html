@@ -389,6 +389,16 @@ permalink: /write/
     }
   });
 
+  // A single Enter starts a new markdown paragraph (blank-line separated),
+  // since a lone newline in markdown is just a soft wrap within one paragraph.
+  // Shift+Enter falls through to the browser default for a soft line break.
+  contentEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      insertAtCursor(contentEl, '\n\n');
+    }
+  });
+
   contentEl.addEventListener('dragover', function (e) { e.preventDefault(); });
   contentEl.addEventListener('drop', function (e) {
     if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
@@ -582,14 +592,17 @@ permalink: /write/
       return ghRequest(apiUrl, { method: 'PUT', headers: cfg.headers, body: JSON.stringify(body) });
     }
 
+    var actionsUrl = 'https://github.com/' + cfg.owner + '/' + cfg.repo + '/actions';
+    var buildLinkHtml = ' <a href="' + actionsUrl + '" target="_blank" rel="noopener">빌드 상태 확인</a>';
+
     var savePromise = editingPost
       ? putFile(editingPost.sha).then(function () {
-          ghStatus.innerHTML = '✅ 수정 사항을 커밋했어요! 1~2분 후 사이트에 반영됩니다.';
+          ghStatus.innerHTML = '✅ 수정 사항을 커밋했어요! 1~2분 후 사이트에 반영됩니다.' + buildLinkHtml;
           exitEditMode();
         })
       : putFile()
           .then(function () {
-            ghStatus.innerHTML = '✅ GitHub에 커밋 완료! 1~2분 후 사이트에 반영됩니다.';
+            ghStatus.innerHTML = '✅ GitHub에 커밋 완료! 1~2분 후 사이트에 반영됩니다.' + buildLinkHtml;
           })
           .catch(function (err) {
             if (err.status === 422) {
@@ -597,7 +610,7 @@ permalink: /write/
               return ghRequest(apiUrl + '?ref=' + cfg.branch, { headers: cfg.headers })
                 .then(function (existing) { return putFile(existing.sha); })
                 .then(function () {
-                  ghStatus.innerHTML = '✅ 기존 글을 덮어쓰며 커밋했어요. 1~2분 후 반영됩니다.';
+                  ghStatus.innerHTML = '✅ 기존 글을 덮어쓰며 커밋했어요. 1~2분 후 반영됩니다.' + buildLinkHtml;
                 });
             }
             throw err;
@@ -682,7 +695,9 @@ permalink: /write/
             })
           }).then(function () {
             li.remove();
-            pmStatus.textContent = '"' + file.name + '"을 삭제했어요. 1~2분 후 사이트에 반영됩니다.';
+            var actionsUrl = 'https://github.com/' + cfg.owner + '/' + cfg.repo + '/actions';
+            pmStatus.innerHTML = '"' + file.name + '"을 삭제했어요. 1~2분 후 사이트에 반영됩니다. ' +
+              '<a href="' + actionsUrl + '" target="_blank" rel="noopener">빌드 상태 확인</a>';
           }).catch(function (err) {
             delBtn.disabled = false;
             delBtn.textContent = '삭제';
