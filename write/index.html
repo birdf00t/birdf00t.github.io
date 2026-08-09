@@ -229,7 +229,7 @@ permalink: /write/
 
     function flush() {
       if (buf.length) {
-        html.push('<p>' + inline(buf.join(' ')) + '</p>');
+        html.push('<p>' + buf.map(inline).join('<br>') + '</p>');
         buf = [];
       }
     }
@@ -386,16 +386,6 @@ permalink: /write/
     if (items.length && items[0].type.indexOf('image/') === 0) {
       e.preventDefault();
       insertImageFiles(items);
-    }
-  });
-
-  // A single Enter starts a new markdown paragraph (blank-line separated),
-  // since a lone newline in markdown is just a soft wrap within one paragraph.
-  // Shift+Enter falls through to the browser default for a soft line break.
-  contentEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      insertAtCursor(contentEl, '\n\n');
     }
   });
 
