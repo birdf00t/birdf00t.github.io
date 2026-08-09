@@ -162,7 +162,17 @@ permalink: /write/
   var pvTags = document.getElementById('pv-tags');
   var pvContent = document.getElementById('pv-content');
 
-  dateEl.valueAsDate = new Date();
+  // input[type=date].valueAsDate resolves via UTC, which can land on the
+  // wrong day for timezones ahead of UTC (e.g. KST before 09:00 is still
+  // "yesterday" in UTC). Build the date string from local Y/M/D instead.
+  function todayLocalISO() {
+    var d = new Date();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return d.getFullYear() + '-' + m + '-' + day;
+  }
+
+  dateEl.value = todayLocalISO();
 
   var seriesChipRow = document.getElementById('series-chip-row');
   if (seriesChipRow) {
@@ -401,7 +411,7 @@ permalink: /write/
     var title = titleEl.value.trim();
     var series = seriesEl.value.trim();
     var tagsRaw = tagsEl.value.trim();
-    var date = dateEl.value || new Date().toISOString().slice(0, 10);
+    var date = dateEl.value || todayLocalISO();
     var content = contentEl.value;
 
     var tags = tagsRaw
