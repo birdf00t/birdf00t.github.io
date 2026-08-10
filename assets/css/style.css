@@ -412,13 +412,26 @@ main.wrap {
   margin-bottom: 32px;
 }
 
-.back-link {
-  display: block;
+.post-footer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   max-width: 960px;
   margin: 32px auto 0;
+}
+.back-link {
+  display: block;
   font-size: 14px;
   color: var(--muted);
 }
+.edit-link {
+  font-size: 14px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+.edit-link:hover { color: var(--accent); text-decoration: none; }
 
 /* write form */
 .write-form {

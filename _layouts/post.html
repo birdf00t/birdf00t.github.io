@@ -19,4 +19,7 @@ layout: default
   </div>
 </article>
 
-<a class="back-link" href="{{ '/' | relative_url }}">← 목록으로</a>
+<div class="post-footer-nav">
+  <a class="back-link" href="{{ '/' | relative_url }}">← 목록으로</a>
+  <a class="edit-link" href="{{ '/write/' | relative_url }}?edit={{ page.path | url_encode }}">✏️ 수정</a>
+</div>
