@@ -2,7 +2,7 @@
 layout: post
 title: "Construct, Align, and Reason: Large Ontology Models for Enterprise Knowledge Management"
 date: 2026-08-10 09:00:16 +0900
-series: Short Paper
+series: Knowledge Graph / Ontology
 tags: [LLM, Ontology]
 ---
 
@@ -12,3 +12,4 @@ DB와 텍스트를 하나의 온톨로지로 통합하고, 그래프 인코더�
 ![](https://velog.velcdn.com/images/birdf00t/post/3e4c8757-1a21-4ea6-baeb-14f83e491806/image.png)
 
 [paper link](arxiv.org/pdf/2602.00029)
+
