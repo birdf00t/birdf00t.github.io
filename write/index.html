@@ -55,12 +55,12 @@ permalink: /write/
     <form id="post-form" class="write-form">
       <label>
         제목 <span class="req">*</span>
-        <input type="text" id="f-title" required placeholder="예: 첫 번째 글">
+        <input type="text" id="f-title">
       </label>
 
       <label>
         시리즈(카테고리) <span class="req">*</span>
-        <input type="text" id="f-series" required placeholder="예: 회고, 개발노트, 여행" list="series-options">
+        <input type="text" id="f-series" list="series-options">
         <datalist id="series-options">
           {% for s in existing_series %}
           <option value="{{ s }}"></option>
