@@ -2,7 +2,7 @@
 layout: post
 title: "Disentangling Latent Risk Pathways via Bayesian Hypergraph Inference"
 date: 2026-08-10 09:47:44 +0900
-series: Representation learning
+series: Short Paper
 tags: [ICML2026]
 ---
 
@@ -23,3 +23,4 @@ Bayesian Hypergraph Pathway Inference (BHPI): 질병을 하이퍼그래프의 �
 ### Info
 [paper link](https://openreview.net/pdf?id=vNfbqRzash)
 [code link](https://github.com/Naomi-Ding/BHPI)
+
