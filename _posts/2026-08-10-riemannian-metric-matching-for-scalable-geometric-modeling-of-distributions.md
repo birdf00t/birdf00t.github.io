@@ -3,7 +3,7 @@ layout: post
 title: "Riemannian Metric Matching for Scalable Geometric Modeling of Distributions"
 date: 2026-08-10 08:58:14 +0900
 series: Short Paper
-tags: [ICML2026, manifold, Riemannian Geomtry]
+tags: [ICML2026, Manifold, Riemannian Geomtry]
 ---
 
 ### BackGround
@@ -36,4 +36,5 @@ _**매니폴드 위에서의 경로 탐색 최적성**_
 
 ### Inf
 [paper link](openreview.net/pdf?id=KVzXnWPLgX)
+
 
