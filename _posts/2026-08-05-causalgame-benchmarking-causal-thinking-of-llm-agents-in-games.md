@@ -3,7 +3,7 @@ layout: post
 title: "CausalGame: Benchmarking Causal Thinking of LLM Agents in Games"
 date: 2026-08-05 18:01:47 +0900
 series: Causal AI
-tags: [ICML2026, Agent, LLM, benchmark]
+tags: [ICML2026, Agent, LLM, Benchmark]
 ---
 
 ### Why
@@ -34,4 +34,5 @@ _**기존 벤치마크들과 비교 기준**_ : Automated evaluation(자동 평�
 ![](https://velog.velcdn.com/images/birdf00t/post/92153dd1-8bd7-4002-b686-dc3822ad2e5a/image.png)
 
 ### Info
+
 
