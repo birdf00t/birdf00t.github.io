@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Learning to Theorize the World from Observation"
+date: 2026-08-10 08:56:35 +0900
 series: WorldModel
 tags: [ICML2026]
 ---

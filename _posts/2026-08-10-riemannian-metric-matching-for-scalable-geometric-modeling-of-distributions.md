@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Riemannian Metric Matching for Scalable Geometric Modeling of Distributions"
+date: 2026-08-10 08:58:14 +0900
 series: Representation learning
 tags: [ICML2026, manifold, Riemannian Geomtry]
 ---

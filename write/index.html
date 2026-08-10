@@ -407,6 +407,26 @@ permalink: /write/
     }
   });
 
+  // Post order on the home page follows front matter `date`. Multiple posts
+  // published the same calendar day would otherwise tie on date-only and
+  // fall back to alphabetical order, so stamp the actual time too.
+  function tzOffsetString(d) {
+    var off = -d.getTimezoneOffset();
+    var sign = off >= 0 ? '+' : '-';
+    var abs = Math.abs(off);
+    var hh = String(Math.floor(abs / 60)).padStart(2, '0');
+    var mm = String(abs % 60).padStart(2, '0');
+    return sign + hh + mm;
+  }
+
+  function dateTimeFrontMatter(dateStr) {
+    var now = new Date();
+    var hh = String(now.getHours()).padStart(2, '0');
+    var mm = String(now.getMinutes()).padStart(2, '0');
+    var ss = String(now.getSeconds()).padStart(2, '0');
+    return dateStr + ' ' + hh + ':' + mm + ':' + ss + ' ' + tzOffsetString(now);
+  }
+
   function buildPost() {
     var title = titleEl.value.trim();
     var series = seriesEl.value.trim();
@@ -418,10 +438,13 @@ permalink: /write/
       ? tagsRaw.split(',').map(function (t) { return t.trim(); }).filter(Boolean)
       : [];
 
+    var dateLine = (editingPost && editingPost.originalDate) || dateTimeFrontMatter(date);
+
     var frontMatter = [
       '---',
       'layout: post',
       'title: "' + title.replace(/"/g, '\\"') + '"',
+      'date: ' + dateLine,
       'series: ' + series,
       'tags: [' + tags.join(', ') + ']',
       '---',
@@ -733,6 +756,7 @@ permalink: /write/
     var titleMatch = fm.match(/^title:\s*"(.*)"\s*$/m) || fm.match(/^title:\s*'(.*)'\s*$/m) || fm.match(/^title:\s*(.*)$/m);
     var seriesMatch = fm.match(/^series:\s*(.*)$/m);
     var tagsMatch = fm.match(/^tags:\s*\[(.*)\]\s*$/m);
+    var dateMatch = fm.match(/^date:\s*(.*)$/m);
 
     var tags = tagsMatch
       ? tagsMatch[1].split(',').map(function (t) { return t.trim(); }).filter(Boolean)
@@ -742,6 +766,7 @@ permalink: /write/
       title: titleMatch ? titleMatch[1].trim().replace(/\\"/g, '"') : '',
       series: seriesMatch ? seriesMatch[1].trim() : '',
       tags: tags,
+      originalDate: dateMatch ? dateMatch[1].trim() : '',
       body: body
     };
   }
@@ -752,7 +777,7 @@ permalink: /write/
   var editingPost = null; // { path, sha, name }
 
   function enterEditMode(file, parsed, dateStr) {
-    editingPost = { path: file.path, sha: file.sha, name: file.name };
+    editingPost = { path: file.path, sha: file.sha, name: file.name, originalDate: parsed.originalDate };
 
     titleEl.value = parsed.title;
     seriesEl.value = parsed.series;

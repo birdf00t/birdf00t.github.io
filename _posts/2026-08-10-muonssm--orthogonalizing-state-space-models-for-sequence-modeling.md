@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "MuonSSM : Orthogonalizing State Space Models for Sequence Modeling"
+date: 2026-08-10 08:47:48 +0900
 series: SSM
 tags: [ICML2026, Muon, Optimizer]
 ---

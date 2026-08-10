@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Construct, Align, and Reason: Large Ontology Models for Enterprise Knowledge Management"
+date: 2026-08-10 09:00:16 +0900
 series: Short Paper
 tags: [LLM, Ontology]
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "A Recursive Decomposition Framework for Causal Structure Learning in the Presence of Latent Variables"
+date: 2026-08-10 08:08:20 +0900
 series: Causal AI
 tags: [ICML2026, Graph]
 ---

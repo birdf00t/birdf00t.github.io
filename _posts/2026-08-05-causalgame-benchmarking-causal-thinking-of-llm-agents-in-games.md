@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "CausalGame: Benchmarking Causal Thinking of LLM Agents in Games"
+date: 2026-08-05 18:01:47 +0900
 series: Causal AI
 tags: [ICML2026, Agent, LLM, benchmark]
 ---
