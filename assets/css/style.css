@@ -230,6 +230,7 @@ main.wrap {
   padding: 28px 0;
   border-bottom: 1px solid var(--border);
 }
+.post-item[hidden] { display: none; }
 .post-item:first-child { padding-top: 0; }
 .post-item-body { flex: 1; min-width: 0; }
 .post-thumb {
@@ -354,6 +355,7 @@ main.wrap {
   margin-right: 6px;
 }
 .badge:hover { text-decoration: none; opacity: 0.85; }
+.badge[hidden] { display: none; }
 .series-list {
   list-style: none;
   padding: 0;
